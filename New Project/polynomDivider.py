@@ -15,6 +15,8 @@ def getRest(inputBits, polynom):
     pollen = len(polynom)
     index = 0
     rest = []
+    while inputBits[index] == 0:
+    	index += 1
     while index < len(inputBits):
         #print 'Index =', index
         rightBoard = index + pollen
@@ -46,6 +48,7 @@ print '\n\n'
 print getRest(initBits, polynom)
  
 rest = getRest(inputBits, polynom)
+print rest
 leftBoard = 0
 while not isNormal(rest) and leftBoard < len(inputBits):
     leftBoard += 1
