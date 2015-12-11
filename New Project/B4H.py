@@ -2,11 +2,12 @@ import polynomDivider as div
 import math
 
 def isPrime(number):
-    end = int(number ** 0.5)
-    for i in range(2, end + 1):
+    i = 2
+    while i * i < number:
         if number % i == 0:
-            return True
-    return False
+            return False
+        i += 1
+    return True
 
 def multiplyPolynoms(left, right):
     bRight = bin(right)[2:]
@@ -31,7 +32,10 @@ def getCreatingPolynom(*polynoms):
 
 def getMinimalPolynoms(fullCodeLength, mistakesCount):
     polynoms = []
-    lastPolynom = 2 ** (mistakesCount * 2 - 1)
+    highestDegree = math.log(fullCodeLength + 1.0, 2)
+    if highestDegree > int(highestDegree):
+        highestDegree = int(highestDegree) + 1
+    lastPolynom = 2 ** highestDegree
     for i in range(mistakesCount):
         polynom = 0
         for j in range(lastPolynom, 0, -1):
@@ -41,3 +45,24 @@ def getMinimalPolynoms(fullCodeLength, mistakesCount):
                 polynoms.append(bin(polynom)[2:])
                 break
     return polynoms
+
+def getBitsList(polynom):
+    bits = bin(polynom)[2:]
+    res = [x for x in bits]
+    return res
+
+def addBits(left, right):
+    temp = left
+    if len(left
+    # continue ...
+
+def getB4HCode(inputBits, fullCodeLength, mistakesCount):
+    controlBitsCount = fullCodeLength - len(inputBits)
+    minimalPolynoms = getMinimalPolynoms(fullCodeLength, mistakesCount)
+    creatingPolynom = getCreatingPolynom(minimalPolynoms)
+    if type(inputBits) == type(''):
+        inputBits += ('0' * controlBitsCount)
+    else:
+        inputBits.extend([0] * controlBitsCount)
+    rest = getRest(inputBits, getBitsList(creatingPolynom)
+    
