@@ -33,28 +33,33 @@ def getRest(inputBits, polynom):
     #print 'In end of getRest'
     return rest
  
-def isNormal(rest):
+def isNormal(rest, mistakesCount):
     onesCount = 0
     for i in rest:
         if i:
             onesCount += 1
-    return onesCount <= 2
- 
-initBits = [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-inputBits = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1]
-polynom = [1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1]
- 
-print '\n\n'
-print getRest(initBits, polynom)
- 
-rest = getRest(inputBits, polynom)
-print rest
-leftBoard = 0
-while not isNormal(rest) and leftBoard < len(inputBits):
-    leftBoard += 1
-    temp = inputBits[leftBoard % len(inputBits) : len(inputBits)]
-    temp.extend(inputBits[0 : leftBoard % len(inputBits)])
-    rest = getRest(temp, polynom)
-    print 'Current offset =', leftBoard, '\tCurrent rest =', rest
-print 'Needed offset:', leftBoard
-print rest
+    return onesCount <= mistakesCount
+
+def getMovesCount(inputBits, polynom):
+    rest = getRest(inputBits, polynom)
+    leftBoard = 0
+    while not isNormal(rest) and leftBoard < len(inputBits):
+        leftBoard += 1
+        temp = inputBits[leftBoard % len(inputBits) : len(inputBits)]
+        temp.extend(inputBits[0 : leftBoard % len(inputBits)])
+        rest = getRest(temp, polynom)
+    return leftBoard
+
+if __name__ == "__main__":
+    initBits = [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    inputBits = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1]
+    polynom = [1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1]
+    
+    print '\n\n'
+    print getRest(initBits, polynom)
+    
+    rest = getRest(inputBits, polynom)
+    print rest
+    leftBoard = getMovesCount(inputBits, polynom)
+    print 'Needed offset:', leftBoard
+    print rest
