@@ -53,8 +53,13 @@ def getBitsList(polynom):
 
 def addBits(left, right):
     temp = left
-    if len(left
-    # continue ...
+    if len(left) < len(right):
+        left = right
+        right = temp
+    res = left[:]
+    for i in range(-1, -len(right), -1):
+        res[i] = (int)res[i] ^ (int)right[i]
+    return res
 
 def getB4HCode(inputBits, fullCodeLength, mistakesCount):
     controlBitsCount = fullCodeLength - len(inputBits)
@@ -65,4 +70,10 @@ def getB4HCode(inputBits, fullCodeLength, mistakesCount):
     else:
         inputBits.extend([0] * controlBitsCount)
     rest = getRest(inputBits, getBitsList(creatingPolynom)
-    
+    result = addBits(inputBits, rest)
+    return result
+
+if __name__ == "__main__":
+    inputBits = []
+    codeLength = 31
+    mistakesCount = 2
