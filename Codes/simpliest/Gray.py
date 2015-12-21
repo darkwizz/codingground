@@ -18,3 +18,9 @@ def goGray(number):
         print number[i - 1], '+', number[i], '=', res
     return y
 
+if __name__ == '__main__':
+    inputBits = [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1]
+    print goGray(inputBits)
+    print
+    code = [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0]
+    print goDecodeGray(code)
