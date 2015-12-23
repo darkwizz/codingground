@@ -3,10 +3,14 @@ __author__ = 'artur'
 
 def divideOnEqual(probabilities):
     index = 1
+    bestMin = abs(sum(probabilities[:index]) - sum(probabilities[index:]))
     if len(probabilities) == 2 or len(probabilities) == 3:
         return index
-    while abs(sum(probabilities[:index]) - sum(probabilities[index:])) > 0.058 and index < len(probabilities):
-        index += 1
+    for i in range(2, len(probabilities)):
+        curMin = abs(sum(probabilities[:i]) - sum(probabilities[i:]))
+        if curMin < bestMin:
+            index = i
+            bestMin = curMin
     return index
 
 def buildShennonFanoTable(probabilities):
